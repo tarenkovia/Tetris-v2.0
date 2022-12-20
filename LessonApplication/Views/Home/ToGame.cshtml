@@ -1,0 +1,37 @@
+﻿@model LessonApplication.Models.Games.GameModel
+
+
+   
+<head>
+    <title>Tetris</title>
+    <link rel='stylesheet' type="text/css" href='tetrisstyle.css' />
+</head>
+<body background="back.jpg" bgproperties="fixed" scroll="no" style="overflow: hidden;">
+    </div>>
+    <embed src="audio/Orsten - Fleur Blanche.mp3" autostart="True" loop="True" hidden="True" width="170" height="70"></embed>
+    <div id="tetris">
+        <div id="tetrisleft">
+            <canvas id="tetriscanvas" width="300" height="900"></canvas>
+            <audio id="clearsound" src="audio/brue.mp3" preload="auto"></audio>
+            <audio autoplay loop>
+                <source src="audio/brue.mp3" type="audio/mp3; codecs=vorbis" preload="auto">
+                <small>Извините, тег audio не поддерживается вашим браузером</small>
+            </audio>
+        </div>
+        <div id="tetrisright">
+            <div class="rectangle text">
+                <div align="center"><b>T E T R I S<sub class="forme">by Ivan</sub></b></div>
+                <br class="info">&harr;: move left/right;
+                <br>&uarr;: rotate;
+                <br>&darr; or _: drop;
+                <br>Esc: pause
+                <p><canvas id="figurecanvas" width="120" height="120"></canvas></p>
+                <p class="info" id="tetriscount"></p>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <script src='js/game.js'></script>
+    <script src='js/controller.js'></script>
+    <script src='js/canvas.js'></script>
+</body>

@@ -1,0 +1,59 @@
+﻿#tetriscanvas {
+    display: block;
+    border: 10px black;
+    border-style: dashed solid;
+    height: 600px;
+    width: 300px;
+    margin: 0px;
+    padding: 2px;
+}
+
+#tetris {
+    margin: 0 auto;
+    width: 350px;
+    height: 600px;
+    text-align: center;
+    clear: both;
+}
+
+#tetrisleft {
+    width: 950px;
+    min-width: 900px;
+    height: 0px;
+    float: left;
+    margin: 0px;
+}
+
+#tetrisright {
+    width: 400px;
+    min-width: 850px;
+    height: 600px;
+    float: left;
+    margin: 0px;
+}
+
+.clear {
+    clear: left; /* Отмена обтекания */
+}
+
+.info {
+    margin-left: 15px;
+}
+
+.rectangle {
+    width: 175px;
+    height: 500px;
+    border: 1px solid;
+    margin: auto;
+    background: #66b366;
+}
+
+.text {
+    text-align: center;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.forme {
+    font-size: 10px;
+}
