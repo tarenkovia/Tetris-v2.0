@@ -9,26 +9,54 @@ using DAL;
 
 namespace ORMDal
 {
-	internal class OrmGamesDal : GamesDal
+	public class OrmGamesDal : IGamesDal
 	{
-		public Game GetByUserId(int userId)
+		//public Game GetByUserId(int userId)
+		//{
+		//	var context = new DefaultDbContext();
+		//	try
+		//	{
+		//		var play = context.Games.FirstOrDefault(item => item.UserId == userId);
+
+		//		if (play == null)
+		//		{
+		//			return null;
+		//		}
+		//		var entity = new Game()
+		//		{
+		//			Id = play.Id,
+		//			UserId = userId,
+		//			Score = play.Score
+		//		};
+		//		return entity;
+		//	}
+		//	finally
+		//	{
+		//		context.Dispose();
+		//	}
+		//}
+
+		public List<Game> GetByUserId(int UserId)
 		{
 			var context = new DefaultDbContext();
 			try
 			{
-				var play = context.Games.FirstOrDefault(item => item.UserId == userId);
-
-				if (play == null)
+				var game = context.Games.Where(item => item.UserId == UserId);
+				if (game == null)
 				{
 					return null;
 				}
-				var entity = new Game()
+				List<Game> res = new List<Game>();
+				foreach (Games item in game)
 				{
-					Id = play.Id,
-					UserId = userId,
-					Score = play.Score
-				};
-				return entity;
+					res.Add(new Game()
+					{
+						Id = item.Id,
+						Score = item.Score,
+						UserId = item.UserId
+					});
+				}
+				return res;
 			}
 			finally
 			{

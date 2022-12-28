@@ -1,5 +1,6 @@
 using BL;
 using DAL;
+using Entities;
 using Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -36,24 +37,35 @@ namespace LessonApplication
                     options.AccessDeniedPath = new PathString("/Users/Login");
                     options.ExpireTimeSpan = new TimeSpan(7, 0, 0, 0);
                 });
-            services.AddAuthorization();
+			services.AddAuthorization();
 
-            services.AddControllersWithViews();
+			services.AddControllersWithViews();
 
-            // ровно один экземпляр
-            //services.AddSingleton<IUsersDal>(new UsersDal());
+			// внедрение зависимостей DI - метод достижения слабой связанности между
+			// объектами и их зависимостями
+			services.AddTransient<IUsersDal, OrmUsersDal>();
+			services.AddTransient<IUsersBL, UsersBL>();
+			services.AddTransient<IGamesDal, OrmGamesDal>();
+			services.AddTransient<IGamesBL, GamesBL>();
+			// Теперь можно внедрить эти сервисы в контроллер
+			//services.AddAuthorization();
 
-            // создает новый экземпляр для каждого места в коде, где необхдима реализация
+			//services.AddControllersWithViews();
 
-            services.AddTransient<IUsersDal, OrmUsersDal>();
-            services.AddTransient<IUsersBL, UsersBL>();
+			// ровно один экземпляр
+			//services.AddSingleton<IUsersDal>(new UsersDal());
 
-            // создает один экземпляр в рамках http запроса
-            //services.AddScoped<IUsersDal, UsersDal>();
-        }
+			// создает новый экземпляр для каждого места в коде, где необхдима реализация
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+			//services.AddTransient<IUsersDal, OrmUsersDal>();
+			//services.AddTransient<IUsersBL, UsersBL>();
+
+			// создает один экземпляр в рамках http запроса
+			//services.AddScoped<IUsersDal, UsersDal>();
+		}
+
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

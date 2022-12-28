@@ -5,9 +5,10 @@ using Entities;
 
 namespace Interfaces
 {
-	public interface GamesDal
+	public interface IGamesDal
 	{
-		Game GetByUserId(int userID);
+		//Game GetByUserId(int userID);
+		List<Game> GetByUserId(int UserId);
 		void WriteGameToBD(Game game);
 	}
 }

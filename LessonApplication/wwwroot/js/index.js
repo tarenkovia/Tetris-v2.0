@@ -27,6 +27,7 @@ var colors = [ //Массив цветов
 ];
 var shaped = 0; //Есть ли следующая фигурка
 var savedShape; //Следующая фигурка
+const scoreEl = document.querySelector('#scoreEl')
 
 function drawNewShape(current) { //Нарисовать следующую фигуру на отдельной канве
     var canvas = document.getElementById('figurecanvas');
@@ -89,6 +90,7 @@ function countPlus(lines0) { //Подсчёт очков
     if (count > maxCount) maxCount = count;
     document.getElementById('tetriscount').innerHTML =
         "Lines: " + lines + "<br>Count: " + count + "<br>Record: " + maxCount;
+    //scoreEl.innerHTML = score;
 }
 
 function freeze() { //Остановить фигурку и записать её положение в board
@@ -150,6 +152,9 @@ function keyPress(key) { //Обработчик нажатий клавиш
             var rotated = rotate(current);
             if (valid(0, 0, rotated)) current = rotated;
             break;
+        case 'save':
+            saveGame();
+            break;
     }
 }
 
@@ -181,8 +186,7 @@ function playGame() { //Контроль падения фигурки, создание новой и очистка линии
         var cleared = clearLines();
         if (cleared) countPlus(cleared);
         if (lose) {
-            saveGame()
-            newGame()
+            newGame();
             return false;
         }
         newShape();
@@ -190,6 +194,7 @@ function playGame() { //Контроль падения фигурки, создание новой и очистка линии
 }
 
 function newGame() { //Новая игра
+    saveGame();
     clearInterval(interval);
     init();
     shaped = 0; newShape();
@@ -198,9 +203,9 @@ function newGame() { //Новая игра
 }
 
 function saveGame() {
-    $.post('SeveGame', { score: count }, function () {
-        location.reload();
-	});
+    $.post("SaveTetris", { score: maxCount }, function () {
+        //location.reload();
+    });
 }
 
 newGame();

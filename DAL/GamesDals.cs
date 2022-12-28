@@ -7,13 +7,20 @@ using System.Linq;
 
 namespace DAL
 {
-	internal class GamesDals : GamesDal
+	internal class GamesDals : IGamesDal
 	{
-		private List<Game> game = new List<Game>();
-
-		public Game GetByUserId(int userId)
+		private List<Game> game = new List<Game>()
 		{
-			return game.FirstOrDefault(x => x.UserId == userId);
+			//new Game() {UserId = 0, Score = 0, Id = 0},
+		};
+
+		//public Game GetByUserId(int userId)
+		//{
+		//	return game.FirstOrDefault(x => x.UserId == userId);
+		//}
+		public List<Game> GetByUserId(int UserId)
+		{
+			return (List<Game>)game.Where(item => item.UserId == UserId);
 		}
 
 		public Game GetById(int id)

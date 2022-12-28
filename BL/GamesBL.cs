@@ -6,18 +6,22 @@ using Entities;
 
 namespace BL
 {
-	internal class GamesBL : IGamesBL
+	public class GamesBL : IGamesBL
 	{
-		private GamesDal _dal;
+		private IGamesDal _dal;
 
-		public GamesBL(GamesDal dal)
+		public GamesBL(IGamesDal dal)
 		{
 			_dal = dal;
 		}
 
-		public Game GetByUserId(int userId)
+		//public Game GetByUserId(int userId)
+		//{
+		//	return _dal.GetByUserId(userId);
+		//}
+		public List<Game> GetByUserId(int UserId)
 		{
-			return _dal.GetByUserId(userId);
+			return _dal.GetByUserId(UserId);
 		}
 
 		public void WriteGameToBD(Game play)

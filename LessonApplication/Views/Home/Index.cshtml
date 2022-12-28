@@ -3,9 +3,11 @@
 <html>
 <head>
     <title>Tetris</title>
-    <link rel='stylesheet' type="text/css" href='css/site.css' />
+    <link rel='stylesheet' type="text/css" href="~/css/site.css" />
 </head>
 <body background="animationBack" bgproperties="fixed" scroll="no" style="overflow: hidden;">
+    <span>Score: </span>
+    <span id="scoreEl">0</span>
     <embed src="audio/Orsten - Fleur Blanche.mp3" autostart="True" loop="True" hidden="True" width="170" height="70"></embed>
     <div id="tetris">
         <div id="tetrisleft">
@@ -23,14 +25,16 @@
                 <br>&uarr;: rotate;
                 <br>&darr; or _: drop;
                 <br>Esc: pause
+                @*//<button type="submit" class="btn btn-primary btn-block" onclick="saveGame(500)"></button>*@
                 <p><canvas id="figurecanvas" width="120" height="120"></canvas></p>
                 <p class="info" id="tetriscount"></p>
             </div>
         </div>
         <div class="clear"></div>
     </div>
-    <script src='js/index.js'></script>
-    <script src='js/controller.js'></script>
-    <script src='js/canvas.js'></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/index.js"></script>
+    <script src='~/js/controller.js'></script>
+    <script src='~/js/canvas.js'></script>
 </body>
 </html>

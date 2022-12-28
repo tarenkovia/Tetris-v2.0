@@ -20,9 +20,11 @@ namespace LessonApplication.Controllers
         private IUsersBL _userBL;
         private IGamesBL _gamesBL;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUsersBL usersBL, IGamesBL gamesBL)
         {
             _logger = logger;
+            _userBL = usersBL;
+            _gamesBL = gamesBL;
         }
 
         [Authorize]
@@ -40,8 +42,8 @@ namespace LessonApplication.Controllers
 
         public IActionResult Privacy()
         {
-            return Json(new { Id = 1, Name = "Ivan" });
-        }
+			return View();
+		}
 
 
         public IActionResult Info() {
@@ -62,21 +64,22 @@ namespace LessonApplication.Controllers
             GameModel gameModel = new GameModel()
             {
                 Score = 0,
-                userId = _userBL.GetByLogin(User.Identity.Name).Id
+                UserId = _userBL.GetByLogin(User.Identity.Name).Id
             };
             return View(gameModel);
         }
 
 		[HttpPost]
 		[Authorize]
-		public IActionResult SeveTetris(int score)
+		public IActionResult SaveTetris(int score)
 		{
 			Game game = new Game()
 			{
 				Score = score,
-				UserId = _userBL.GetByLogin(User.Identity?.Name).Id
+				UserId = _userBL.GetByLogin(User.Identity.Name).Id
 			};
-            _gamesBL.WriteGameToBD(game);
+
+			_gamesBL.WriteGameToBD(game);
 
             return RedirectToAction("Index", "Home");
 		}

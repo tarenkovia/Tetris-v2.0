@@ -7,7 +7,9 @@ namespace Interfaces
 {
 	public interface IGamesBL
 	{
-		Game GetByUserId(int userID);
+		//Game GetByUserId(int userID);
+
+		List<Game> GetByUserId(int UserId);
 		void WriteGameToBD(Game game);
 	}
 }

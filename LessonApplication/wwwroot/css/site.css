@@ -57,3 +57,8 @@
 .forme {
     font-size: 10px;
 }
+
+.body{
+    background-image: url("animationBack.gif");
+    margin: 0;
+}
